@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: mediplus-container
-          image: 209888747223.dkr.ecr.eu-north-1.amazonaws.com/mediplus:latest
+          image: 209888747223.dkr.ecr.eu-north-1.amazonaws.com/mediplus:GIT_RUN_NUMBER
           imagePullPolicy: Always
           ports:
             - containerPort: 80
