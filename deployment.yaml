@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mediplus-deployment
+  labels:
+    app: mediplus
+spec:
+  replicas: 2  # number of pods to run
+  selector:
+    matchLabels:
+      app: mediplus
+  template:
+    metadata:
+      labels:
+        app: mediplus
+    spec:
+      containers:
+        - name: mediplus-container
+          image: 209888747223.dkr.ecr.eu-north-1.amazonaws.com/mediplus:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+        - name: ecr-registry-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mediplus-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: mediplus
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
